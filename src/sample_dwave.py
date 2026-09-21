@@ -9,7 +9,8 @@ import helpers as dh
 SOURCE_DIRECTORY = Path(__file__).resolve().parent
 PROJECT_ROOT = SOURCE_DIRECTORY.parent
 EMBEDDINGS_DIRECTORY = PROJECT_ROOT / "embeddings"
-OUTPUT_DIRECTORY = PROJECT_ROOT / "data"
+# OUTPUT_DIRECTORY = PROJECT_ROOT / "data"
+OUTPUT_DIRECTORY = Path("/Volumes/ThinhLe/data")
 
 # QPU devices
 QPU_DEVICES = ["Advantage_system6", "Advantage2_system1"]

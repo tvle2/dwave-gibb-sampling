@@ -53,7 +53,7 @@ def run_dwave(params, path, h, J, solver, num_jobs):
 
 
     data  = json.dumps(all_samples).encode('utf-8')
-    compressed_data = zlib.compress(data, 1)
+    compressed_data = zlib.compress(data, 6)
 
     temp_file = filename_out + ".tmp"
     with open(temp_file, "wb") as file:
