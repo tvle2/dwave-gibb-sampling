@@ -1,0 +1,118 @@
+{
+  "seed": 20260930,
+  "block_size": 2,
+  "min_target_train": 100,
+  "min_state_train": 100,
+  "conditional_null": "susceptibility",
+  "datasets": [
+    {
+      "id": "scale1",
+      "path": "../results/scale1",
+      "role": "development",
+      "readout": {
+        "kind": "sensitivity",
+        "epsilon_values": [
+          0.001,
+          0.005
+        ],
+        "provenance": "Illustrative transfer sensitivity only; replace with independent controls"
+      }
+    },
+    {
+      "id": "scale01",
+      "path": "../results/scale01",
+      "role": "holdout",
+      "readout": {
+        "kind": "sensitivity",
+        "epsilon_values": [
+          0.001,
+          0.005
+        ],
+        "provenance": "Illustrative transfer sensitivity only; replace with independent controls"
+      }
+    }
+  ],
+  "primary_ids": [
+    "scale1",
+    "scale01"
+  ],
+  "families": {
+    "susceptibility": {
+      "candidates": [
+        {
+          "family": "susceptibility_transfer",
+          "beta_per_scale": 1,
+          "chi": -0.02
+        },
+        {
+          "family": "susceptibility_transfer",
+          "beta_per_scale": 1,
+          "chi": 0
+        },
+        {
+          "family": "susceptibility_transfer",
+          "beta_per_scale": 1,
+          "chi": 0.02
+        },
+        {
+          "family": "susceptibility_transfer",
+          "beta_per_scale": 2,
+          "chi": -0.02
+        },
+        {
+          "family": "susceptibility_transfer",
+          "beta_per_scale": 2,
+          "chi": 0
+        },
+        {
+          "family": "susceptibility_transfer",
+          "beta_per_scale": 2,
+          "chi": 0.02
+        },
+        {
+          "family": "susceptibility_transfer",
+          "beta_per_scale": 3,
+          "chi": -0.02
+        },
+        {
+          "family": "susceptibility_transfer",
+          "beta_per_scale": 3,
+          "chi": 0
+        },
+        {
+          "family": "susceptibility_transfer",
+          "beta_per_scale": 3,
+          "chi": 0.02
+        }
+      ]
+    },
+    "quantum_snapshot": {
+      "candidates": [
+        {
+          "family": "physical_snapshot",
+          "A_GHz": 0.1,
+          "B_GHz": 1,
+          "temperature_mK": 15
+        },
+        {
+          "family": "physical_snapshot",
+          "A_GHz": 0.1,
+          "B_GHz": 1,
+          "temperature_mK": 20
+        },
+        {
+          "family": "physical_snapshot",
+          "A_GHz": 0.2,
+          "B_GHz": 1,
+          "temperature_mK": 15
+        },
+        {
+          "family": "physical_snapshot",
+          "A_GHz": 0.2,
+          "B_GHz": 1,
+          "temperature_mK": 20
+        }
+      ]
+    }
+  }
+}

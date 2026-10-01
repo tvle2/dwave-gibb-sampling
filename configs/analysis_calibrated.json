@@ -1,0 +1,444 @@
+{
+  "analysis_status": "illustrative development configuration; not a preregistration or calibrated nuisance envelope",
+  "seed": 20260930,
+  "block_size": 2,
+  "cv_folds": 3,
+  "min_target_train": 100,
+  "min_state_train": 100,
+  "conditional_null": "global_mixture",
+  "readout": {
+    "kind": "calibration",
+    "path": "../results/readout_calibration",
+    "draws": 8
+  },
+  "families": {
+    "classical": {
+      "candidates": [
+        {
+          "family": "classical",
+          "beta": 0.5
+        },
+        {
+          "family": "classical",
+          "beta": 1
+        },
+        {
+          "family": "classical",
+          "beta": 1.5
+        },
+        {
+          "family": "classical",
+          "beta": 2
+        },
+        {
+          "family": "classical",
+          "beta": 3
+        },
+        {
+          "family": "classical",
+          "beta": 6
+        }
+      ]
+    },
+    "quantum": {
+      "candidates": [
+        {
+          "family": "quantum",
+          "beta": 1,
+          "gamma": 0
+        },
+        {
+          "family": "quantum",
+          "beta": 1,
+          "gamma": 0.05
+        },
+        {
+          "family": "quantum",
+          "beta": 1,
+          "gamma": 0.1
+        },
+        {
+          "family": "quantum",
+          "beta": 1,
+          "gamma": 0.2
+        },
+        {
+          "family": "quantum",
+          "beta": 1,
+          "gamma": 0.4
+        },
+        {
+          "family": "quantum",
+          "beta": 1.5,
+          "gamma": 0
+        },
+        {
+          "family": "quantum",
+          "beta": 1.5,
+          "gamma": 0.05
+        },
+        {
+          "family": "quantum",
+          "beta": 1.5,
+          "gamma": 0.1
+        },
+        {
+          "family": "quantum",
+          "beta": 1.5,
+          "gamma": 0.2
+        },
+        {
+          "family": "quantum",
+          "beta": 1.5,
+          "gamma": 0.4
+        },
+        {
+          "family": "quantum",
+          "beta": 2,
+          "gamma": 0
+        },
+        {
+          "family": "quantum",
+          "beta": 2,
+          "gamma": 0.05
+        },
+        {
+          "family": "quantum",
+          "beta": 2,
+          "gamma": 0.1
+        },
+        {
+          "family": "quantum",
+          "beta": 2,
+          "gamma": 0.2
+        },
+        {
+          "family": "quantum",
+          "beta": 2,
+          "gamma": 0.4
+        },
+        {
+          "family": "quantum",
+          "beta": 3,
+          "gamma": 0
+        },
+        {
+          "family": "quantum",
+          "beta": 3,
+          "gamma": 0.05
+        },
+        {
+          "family": "quantum",
+          "beta": 3,
+          "gamma": 0.1
+        },
+        {
+          "family": "quantum",
+          "beta": 3,
+          "gamma": 0.2
+        },
+        {
+          "family": "quantum",
+          "beta": 3,
+          "gamma": 0.4
+        },
+        {
+          "family": "quantum",
+          "beta": 6,
+          "gamma": 0
+        },
+        {
+          "family": "quantum",
+          "beta": 6,
+          "gamma": 0.05
+        },
+        {
+          "family": "quantum",
+          "beta": 6,
+          "gamma": 0.1
+        },
+        {
+          "family": "quantum",
+          "beta": 6,
+          "gamma": 0.2
+        },
+        {
+          "family": "quantum",
+          "beta": 6,
+          "gamma": 0.4
+        }
+      ]
+    },
+    "susceptibility": {
+      "candidates": [
+        {
+          "family": "susceptibility",
+          "beta": 1,
+          "chi": -0.02
+        },
+        {
+          "family": "susceptibility",
+          "beta": 1,
+          "chi": 0
+        },
+        {
+          "family": "susceptibility",
+          "beta": 1,
+          "chi": 0.02
+        },
+        {
+          "family": "susceptibility",
+          "beta": 1.5,
+          "chi": -0.02
+        },
+        {
+          "family": "susceptibility",
+          "beta": 1.5,
+          "chi": 0
+        },
+        {
+          "family": "susceptibility",
+          "beta": 1.5,
+          "chi": 0.02
+        },
+        {
+          "family": "susceptibility",
+          "beta": 2,
+          "chi": -0.02
+        },
+        {
+          "family": "susceptibility",
+          "beta": 2,
+          "chi": 0
+        },
+        {
+          "family": "susceptibility",
+          "beta": 2,
+          "chi": 0.02
+        },
+        {
+          "family": "susceptibility",
+          "beta": 3,
+          "chi": -0.02
+        },
+        {
+          "family": "susceptibility",
+          "beta": 3,
+          "chi": 0
+        },
+        {
+          "family": "susceptibility",
+          "beta": 3,
+          "chi": 0.02
+        }
+      ]
+    },
+    "uniform_field": {
+      "candidates": [
+        {
+          "family": "uniform_field",
+          "beta": 1,
+          "eta": 0
+        },
+        {
+          "family": "uniform_field",
+          "beta": 1,
+          "eta": 0.1
+        },
+        {
+          "family": "uniform_field",
+          "beta": 1,
+          "eta": 0.2
+        },
+        {
+          "family": "uniform_field",
+          "beta": 1.5,
+          "eta": 0
+        },
+        {
+          "family": "uniform_field",
+          "beta": 1.5,
+          "eta": 0.1
+        },
+        {
+          "family": "uniform_field",
+          "beta": 1.5,
+          "eta": 0.2
+        },
+        {
+          "family": "uniform_field",
+          "beta": 2,
+          "eta": 0
+        },
+        {
+          "family": "uniform_field",
+          "beta": 2,
+          "eta": 0.1
+        },
+        {
+          "family": "uniform_field",
+          "beta": 2,
+          "eta": 0.2
+        },
+        {
+          "family": "uniform_field",
+          "beta": 3,
+          "eta": 0
+        },
+        {
+          "family": "uniform_field",
+          "beta": 3,
+          "eta": 0.1
+        },
+        {
+          "family": "uniform_field",
+          "beta": 3,
+          "eta": 0.2
+        }
+      ]
+    },
+    "pairwise": {
+      "candidates": [
+        {
+          "family": "pairwise_fit",
+          "l2": 0.001
+        },
+        {
+          "family": "pairwise_fit",
+          "l2": 0.01
+        }
+      ]
+    },
+    "global_mixture": {
+      "candidates": [
+        {
+          "family": "mixture_fit",
+          "components": [
+            {
+              "family": "classical",
+              "beta": 0.5,
+              "kappa": 0.4
+            },
+            {
+              "family": "classical",
+              "beta": 0.5,
+              "kappa": 0.5
+            },
+            {
+              "family": "classical",
+              "beta": 0.5,
+              "kappa": 0.6
+            },
+            {
+              "family": "classical",
+              "beta": 1.5,
+              "kappa": 0.4
+            },
+            {
+              "family": "classical",
+              "beta": 1.5,
+              "kappa": 0.5
+            },
+            {
+              "family": "classical",
+              "beta": 1.5,
+              "kappa": 0.6
+            },
+            {
+              "family": "classical",
+              "beta": 3,
+              "kappa": 0.4
+            },
+            {
+              "family": "classical",
+              "beta": 3,
+              "kappa": 0.5
+            },
+            {
+              "family": "classical",
+              "beta": 3,
+              "kappa": 0.6
+            },
+            {
+              "family": "classical",
+              "beta": 6,
+              "kappa": 0.4
+            },
+            {
+              "family": "classical",
+              "beta": 6,
+              "kappa": 0.5
+            },
+            {
+              "family": "classical",
+              "beta": 6,
+              "kappa": 0.6
+            }
+          ]
+        }
+      ]
+    },
+    "projected_consistency": {
+      "fit_scope": "62_53",
+      "candidates": [
+        {
+          "family": "projected",
+          "x": 0.05
+        },
+        {
+          "family": "projected",
+          "x": 0.1
+        },
+        {
+          "family": "projected",
+          "x": 0.2
+        },
+        {
+          "family": "projected",
+          "x": 0.3
+        },
+        {
+          "family": "projected",
+          "x": 0.6
+        },
+        {
+          "family": "projected",
+          "x": 1
+        },
+        {
+          "family": "projected",
+          "x": 1.5
+        },
+        {
+          "family": "projected",
+          "x": 2
+        }
+      ]
+    },
+    "sector_descriptive": {
+      "fit_scope": "G",
+      "candidates": [
+        {
+          "family": "sector_fit",
+          "x": 0.1
+        },
+        {
+          "family": "sector_fit",
+          "x": 0.3
+        },
+        {
+          "family": "sector_fit",
+          "x": 0.6
+        },
+        {
+          "family": "sector_fit",
+          "x": 1
+        },
+        {
+          "family": "sector_fit",
+          "x": 1.5
+        }
+      ]
+    }
+  }
+}

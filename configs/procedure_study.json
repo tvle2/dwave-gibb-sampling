@@ -1,0 +1,268 @@
+{
+  "repetitions": 20,
+  "bootstrap_repeats": 199,
+  "controls_per_block": 5000,
+  "control_blocks": 8,
+  "seed": 20260930,
+  "analysis_config": {
+    "block_size": 1,
+    "cv_folds": 2,
+    "min_target_train": 100,
+    "min_state_train": 20,
+    "conditional_null": "classical",
+    "families": {
+      "classical": {
+        "candidates": [
+          {
+            "family": "classical",
+            "beta": 0.5
+          },
+          {
+            "family": "classical",
+            "beta": 1
+          },
+          {
+            "family": "classical",
+            "beta": 1.5
+          },
+          {
+            "family": "classical",
+            "beta": 2
+          },
+          {
+            "family": "classical",
+            "beta": 3
+          },
+          {
+            "family": "classical",
+            "beta": 6
+          }
+        ]
+      },
+      "quantum": {
+        "candidates": [
+          {
+            "family": "quantum",
+            "beta": 1,
+            "gamma": 0
+          },
+          {
+            "family": "quantum",
+            "beta": 1,
+            "gamma": 0.05
+          },
+          {
+            "family": "quantum",
+            "beta": 1,
+            "gamma": 0.1
+          },
+          {
+            "family": "quantum",
+            "beta": 1,
+            "gamma": 0.2
+          },
+          {
+            "family": "quantum",
+            "beta": 1,
+            "gamma": 0.4
+          },
+          {
+            "family": "quantum",
+            "beta": 1.5,
+            "gamma": 0
+          },
+          {
+            "family": "quantum",
+            "beta": 1.5,
+            "gamma": 0.05
+          },
+          {
+            "family": "quantum",
+            "beta": 1.5,
+            "gamma": 0.1
+          },
+          {
+            "family": "quantum",
+            "beta": 1.5,
+            "gamma": 0.2
+          },
+          {
+            "family": "quantum",
+            "beta": 1.5,
+            "gamma": 0.4
+          },
+          {
+            "family": "quantum",
+            "beta": 2,
+            "gamma": 0
+          },
+          {
+            "family": "quantum",
+            "beta": 2,
+            "gamma": 0.05
+          },
+          {
+            "family": "quantum",
+            "beta": 2,
+            "gamma": 0.1
+          },
+          {
+            "family": "quantum",
+            "beta": 2,
+            "gamma": 0.2
+          },
+          {
+            "family": "quantum",
+            "beta": 2,
+            "gamma": 0.4
+          },
+          {
+            "family": "quantum",
+            "beta": 3,
+            "gamma": 0
+          },
+          {
+            "family": "quantum",
+            "beta": 3,
+            "gamma": 0.05
+          },
+          {
+            "family": "quantum",
+            "beta": 3,
+            "gamma": 0.1
+          },
+          {
+            "family": "quantum",
+            "beta": 3,
+            "gamma": 0.2
+          },
+          {
+            "family": "quantum",
+            "beta": 3,
+            "gamma": 0.4
+          },
+          {
+            "family": "quantum",
+            "beta": 6,
+            "gamma": 0
+          },
+          {
+            "family": "quantum",
+            "beta": 6,
+            "gamma": 0.05
+          },
+          {
+            "family": "quantum",
+            "beta": 6,
+            "gamma": 0.1
+          },
+          {
+            "family": "quantum",
+            "beta": 6,
+            "gamma": 0.2
+          },
+          {
+            "family": "quantum",
+            "beta": 6,
+            "gamma": 0.4
+          }
+        ]
+      },
+      "susceptibility": {
+        "candidates": [
+          {
+            "family": "susceptibility",
+            "beta": 1,
+            "chi": -0.02
+          },
+          {
+            "family": "susceptibility",
+            "beta": 1,
+            "chi": 0
+          },
+          {
+            "family": "susceptibility",
+            "beta": 1,
+            "chi": 0.02
+          },
+          {
+            "family": "susceptibility",
+            "beta": 1.5,
+            "chi": -0.02
+          },
+          {
+            "family": "susceptibility",
+            "beta": 1.5,
+            "chi": 0
+          },
+          {
+            "family": "susceptibility",
+            "beta": 1.5,
+            "chi": 0.02
+          },
+          {
+            "family": "susceptibility",
+            "beta": 2,
+            "chi": -0.02
+          },
+          {
+            "family": "susceptibility",
+            "beta": 2,
+            "chi": 0
+          },
+          {
+            "family": "susceptibility",
+            "beta": 2,
+            "chi": 0.02
+          },
+          {
+            "family": "susceptibility",
+            "beta": 3,
+            "chi": -0.02
+          },
+          {
+            "family": "susceptibility",
+            "beta": 3,
+            "chi": 0
+          },
+          {
+            "family": "susceptibility",
+            "beta": 3,
+            "chi": 0.02
+          }
+        ]
+      }
+    }
+  },
+  "scenarios": [
+    {
+      "id": "classical_readout",
+      "simulation": {
+        "model": {
+          "family": "classical",
+          "beta": 1.5
+        },
+        "jobs": 24,
+        "reads_per_job": 2000,
+        "embeddings": 3,
+        "epsilon": 0.01,
+        "shared_fraction": 0.2
+      }
+    },
+    {
+      "id": "quantum_negative_R2",
+      "simulation": {
+        "model": {
+          "family": "quantum",
+          "beta": 1.5,
+          "gamma": 0.2
+        },
+        "jobs": 24,
+        "reads_per_job": 2000,
+        "embeddings": 3,
+        "epsilon": 0.001,
+        "shared_fraction": 0.2
+      }
+    }
+  ]
+}

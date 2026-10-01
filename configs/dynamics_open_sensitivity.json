@@ -1,0 +1,47 @@
+{
+  "kind": "thermal_reset",
+  "schedule": {
+    "path": "synthetic_schedule.csv",
+    "protocol": "synthetic",
+    "provenance": "Artificial test schedule; not a hardware calibration"
+  },
+  "duration_us": 0.005,
+  "temperature_mk": 20,
+  "energy_scale": 1,
+  "kappa": 0.5,
+  "steps": 50,
+  "reset_rate": 10,
+  "dephasing_rate": 5,
+  "field_samples": [
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0.01,
+      0.01,
+      0.01,
+      0.01,
+      0.01,
+      0.01,
+      0.01,
+      0.01
+    ],
+    [
+      -0.01,
+      -0.01,
+      -0.01,
+      -0.01,
+      -0.01,
+      -0.01,
+      -0.01,
+      -0.01
+    ]
+  ]
+}

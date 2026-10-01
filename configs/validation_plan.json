@@ -1,0 +1,24 @@
+{
+  "devices": {
+    "Advantage_system6": "01dae5a273",
+    "Advantage2_system1": "010c30e58c"
+  },
+  "times": [
+    0.02,
+    0.2,
+    2,
+    20
+  ],
+  "scales": [
+    1,
+    0.1
+  ],
+  "kappas": [
+    0.5
+  ],
+  "blocks": 8,
+  "gauges": 2,
+  "reads": 2000,
+  "seed": 20260930,
+  "paired_shims": true
+}
