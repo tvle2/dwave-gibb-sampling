@@ -1,2 +1,10 @@
-data
-src/__pycache__
+data/
+results/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.pytest_cache/
+.DS_Store
+build/
+dist/

@@ -1,5 +1,6 @@
 import json
 import os
+import argparse
 from pathlib import Path
 
 import helpers as dh
@@ -56,6 +57,15 @@ def reads_and_jobs(annealing_time_us):
 
 
 def main():
+    parser = argparse.ArgumentParser(description="ANNNI archive acquisition; dry-run unless --execute is supplied")
+    parser.add_argument("--execute", action="store_true", help="Connect and submit paid QPU jobs")
+    parser.add_argument("--output", type=Path, default=Path(os.environ.get("ANNNI_DATA_DIRECTORY", str(OUTPUT_DIRECTORY))))
+    args = parser.parse_args()
+    if not args.execute:
+        print(f"Dry run: {len(QPU_DEVICES)} devices, {len(J2_VALUES)} kappa values, "
+              f"{len(ENERGY_SCALES)} scales, {len(ANNEALING_TIMES_US)} times.")
+        print(f"Output: {args.output}. Add --execute to submit QPU jobs.")
+        return
     for device in QPU_DEVICES:
 
         # Connect to D-Wave and get the hardware graph
@@ -82,7 +92,7 @@ def main():
                 f"current graph_id={solver.graph_id}"
             )
 
-        output_directory = OUTPUT_DIRECTORY / device / str(solver.graph_id)
+        output_directory = args.output / device / str(solver.graph_id)
         os.makedirs(output_directory, exist_ok=True)
         print(f"Using {len(mappings)} embeddings from {embedding_file.name}")
 
@@ -147,6 +157,12 @@ def main():
                         J,
                         solver,
                         num_jobs=jobs,
+                        metadata={
+                            "embedding_file": str(embedding_file.resolve()),
+                            "condition": {"device": device, "graph_id": str(solver.graph_id),
+                                          "n": N, "kappa": j2, "energy_scale": energy_scale,
+                                          "anneal_time_us": annealing_time_us, "fast_anneal": True},
+                        },
                     )
 
 if __name__ == "__main__":

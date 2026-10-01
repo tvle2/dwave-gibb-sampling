@@ -1,14 +1,10 @@
 import ast
-import json
-import os
-import time
-import zlib
 from pathlib import Path
 
-import networkx as nx
-from dwave.cloud import Client
 
 def start_dwave_connection(device):
+    import networkx as nx
+    from dwave.cloud import Client
     print(f"Attempting to connect to D-Wave solver: {device}...")
     try:
         client = Client.from_config()
@@ -24,50 +20,23 @@ def start_dwave_connection(device):
         print(f"Error connecting to {device}: {error}")
         return None, None
 
-def run_dwave(params, path, h, J, solver, num_jobs):
-
-    filename_out = path + "_solutions.json.zip"
-    if os.path.exists(filename_out):
-        print(f"Skipping, results already exist: {filename_out}")
-        return
-    
-    all_samples = []
-    total_qpu_time = 0.0
-
-    for job_index in range(num_jobs):
-        print(f"Submitting job {job_index + 1}/{num_jobs}")
-        while True:
-            try:
-                future = solver.sample_ising(h, J, answer_mode="raw", **params)
-                all_samples.extend(future.samples)
-                total_qpu_time += future["timing"]["qpu_access_time"] / 1_000_000
-                break
-            except Exception as error:
-                print(f"- D-Wave API Error: {error}")
-                print("- Retrying in 2 seconds...", flush=True)
-                time.sleep(2)
-
-    with open(path + "_QPU_time.txt", "w") as file:
-        file.write(str(total_qpu_time))
-    print(f"    - Total QPU Time: {total_qpu_time:.6f} seconds")
-
-
-    data  = json.dumps(all_samples).encode('utf-8')
-    compressed_data = zlib.compress(data, 6)
-
-    temp_file = filename_out + ".tmp"
-    with open(temp_file, "wb") as file:
-        file.write(compressed_data)
-        file.flush()
-        os.fsync(file.fileno())
-    os.replace(temp_file, filename_out)
-    print(f"Successfully saved results to {filename_out}")
+def run_dwave(params, path, h, J, solver, num_jobs, metadata=None):
+    from annni_selection.acquisition import acquire_jobs
+    return acquire_jobs(params, path, h, J, solver, num_jobs,
+                        metadata=metadata, compression_level=1, consolidate=True)
 
 def read_results(path):
-    with open(path + "_solutions.json.zip", "rb") as file:
-        return json.loads(
-            zlib.decompress(file.read())
-        )
+    """Compatibility convenience; use the streaming decoder for large datasets."""
+    from annni_selection.io import iter_sample_rows, read_json
+    legacy = Path(path + "_solutions.json.zip")
+    if legacy.exists():
+        return list(iter_sample_rows(legacy))
+    manifest_path = Path(path + "_acquisition.json")
+    manifest = read_json(manifest_path)
+    if manifest.get("sample_file"):
+        return list(iter_sample_rows(manifest_path.parent / manifest["sample_file"]))
+    return [row for job in manifest["jobs"]
+            for row in iter_sample_rows(manifest_path.parent / job["file"])]
 
 def load_embeddings(path, n):
 

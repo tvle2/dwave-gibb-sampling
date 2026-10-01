@@ -1,0 +1,13 @@
+{
+  "model": {
+    "family": "classical",
+    "beta": 1.5
+  },
+  "jobs": 32,
+  "reads_per_job": 2000,
+  "embeddings": 4,
+  "epsilon": 0.01,
+  "shared_fraction": 0.2,
+  "correlation_span": 3,
+  "seed": 20260930
+}

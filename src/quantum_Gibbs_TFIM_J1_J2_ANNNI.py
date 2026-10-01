@@ -1,71 +1,46 @@
-import networkx as nx
-import matplotlib.pyplot as plt
-import numpy as np
-from qiskit.quantum_info import SparsePauliOp, DensityMatrix
+"""Standalone full-Hamiltonian example using the analysis package's basis convention.
 
+Run ``python src/quantum_Gibbs_TFIM_J1_J2_ANNNI.py --beta 1.5 --gamma .2``.
+No Qiskit dependency or import-time calculation is required.
 """
-DWave hardware:
-Ferromagnetic is negative
-Antiferromagnetic is positive
-"""
+import argparse
+from annni_selection.states import StateSpace
+from annni_selection.models import quantum_gibbs
+from annni_selection.observables import summarize
+
 
 def create_1D(nodes):
-	G = nx.Graph()
-	for idx in range(nodes-1):
-		G.add_edge(idx, idx+1)
-	G.add_edge(0, nodes-1)
-	return G
+    import networkx as nx
+    graph = nx.Graph()
+    graph.add_edges_from((i, (i + 1) % nodes) for i in range(nodes))
+    return graph
+
+
 def create_ANNNI(nodes):
-	G = create_1D(nodes)
-	NN = list(G.edges())
-	NNN = []
-	for idx in range(nodes-2):
-		G.add_edge(idx, idx+2)
-		NNN.append((idx, idx+2))
-	G.add_edge(0, nodes-2)
-	G.add_edge(1, nodes-1)
-	NNN.append((0, nodes-2))
-	NNN.append((1, nodes-1))
-	return G, NN, NNN
+    graph = create_1D(nodes)
+    nn = list(graph.edges())
+    nnn = sorted({tuple(sorted((i, (i + 2) % nodes))) for i in range(nodes)})
+    graph.add_edges_from(nnn)
+    return graph, nn, nnn
 
-beta = 0.1
-J1 = 1
-J2 = 0.9
-Gamma = 1
-N = 8
 
-G, NN, NNN = create_ANNNI(N)
-J = {}
-for edge in NN:
-	J[edge] = -1*J1
-for edge in NNN:
-	J[edge] = J2
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--beta', type=float, default=.1)
+    parser.add_argument('--gamma', type=float, default=1)
+    parser.add_argument('--kappa', type=float, default=.9)
+    parser.add_argument('--n', type=int, default=8)
+    args = parser.parse_args()
+    space = StateSpace(args.n)
+    probabilities = quantum_gibbs(space, args.beta, args.gamma, args.kappa)
+    print('Basis: logical spin 0 is the most significant bit; bit 0=-1, bit 1=+1')
+    print('States:', len(probabilities), 'normalization:', probabilities.sum())
+    for index, probability in enumerate(probabilities):
+        print(format(index, f'0{args.n}b'), f'{probability:.12g}')
+    if args.n == 8:
+        result = summarize(space, probabilities)
+        print({key: result[key] for key in ('R1', 'R2', 'I_L', 'I_L_pair', 'W')})
 
-terms = []
 
-for i in range(N):
-	terms.append(("X", [i], -Gamma))
-
-for (i, j), Jij in J.items():
-	terms.append(("ZZ", [i, j], Jij))
-
-H = SparsePauliOp.from_sparse_list(terms, num_qubits=N)
-H_matrix = H.to_matrix()
-
-eigenvalues, eigenvectors = np.linalg.eigh(H_matrix)
-print("Spectral range:", max(eigenvalues), min(eigenvalues))
-boltzmann_factors = np.exp(-beta * eigenvalues, dtype=np.complex128)
-Z = np.sum(boltzmann_factors, dtype=np.complex128)
-thermal_weights = boltzmann_factors / Z
-
-rho_matrix = (eigenvectors @ np.diag(thermal_weights) @ eigenvectors.conj().T)
-
-rho = DensityMatrix(rho_matrix)
-
-Pz = rho.probabilities()
-
-print(len(Pz), max(Pz))
-
-for index, p in enumerate(Pz):
-	bitstring = format(index, f"0{N}b")
-	print(bitstring, p)
+if __name__ == '__main__':
+    main()

@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "annni-selection"
+version = "0.1.0"
+description = "Exact models and job-aware validation of ANNNI annealer sampling"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24", "scipy>=1.10"]
+
+[project.optional-dependencies]
+plots = ["matplotlib>=3.7"]
+qpu = ["dwave-cloud-client>=0.13", "networkx>=3", "minorminer>=0.2"]
+
+[project.scripts]
+annni = "annni_selection.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["annni_selection*"]
