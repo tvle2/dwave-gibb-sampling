@@ -1,0 +1,8 @@
+Ferromagnetic	++++++++	2	4.35%
+6–2 domains	++++++−−	16	34.78%
+5–3 domains	+++++−−−	16	34.78%
+4–4 domains	++++−−−−	8	17.39%
+Period-four	++−−++−−	4	8.70%
+Total		46	100%
+
+https://arxiv.org/pdf/2311.01657
